@@ -11,9 +11,9 @@
         "tamasfe.even-better-toml",
         "sourcery.sourcery",
         "cstrap.python-snippets",
-        "eamodio.gitlens",
         "kevinrose.vsc-python-indent",
         "christian-kohler.path-intellisense",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "mhutchie.git-graph"
     ]
 }
