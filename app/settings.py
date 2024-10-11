@@ -1,3 +1,4 @@
+import os
 import secrets
 from typing import Annotated, Any, Literal
 
@@ -7,6 +8,8 @@ from pydantic import (
     computed_field,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+env_file = os.path.join(os.path.dirname(__file__), "../.env")
 
 
 def parse_cors(v: Any) -> list[str] | str:
@@ -20,7 +23,7 @@ def parse_cors(v: Any) -> list[str] | str:
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         # Use top level .env file (one level above ./backend/)
-        env_file="../.env",
+        env_file=env_file,
         env_ignore_empty=True,
         extra="ignore",
     )
@@ -42,11 +45,11 @@ class Settings(BaseSettings):
             self.FRONTEND_URL,
         ]
 
-    DB_HOST: str = "localhost"
-    DB_PORT: int = 3306
-    DB_USER: str = "root"
+    DB_HOST: str
+    DB_PORT: int
+    DB_USER: str
     DB_PASSWORD: str = ""
-    DB_DATABASE: str = ""
+    DB_DATABASE: str
 
     @computed_field  # type: ignore[prop-decorator]
     @property
