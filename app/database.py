@@ -1,8 +1,10 @@
 import contextlib
+import datetime
 from typing import Any, AsyncGenerator, AsyncIterator
 
-from app.settings import settings
+from sqlalchemy import DateTime, MetaData
 from sqlalchemy.ext.asyncio import (
+    AsyncAttrs,
     AsyncConnection,
     AsyncSession,
     async_sessionmaker,
@@ -10,10 +12,26 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 
+from app.settings import settings
 
-class Base(DeclarativeBase):
+
+class Base(AsyncAttrs, DeclarativeBase):
     # https://docs.sqlalchemy.org/en/14/orm/extensions/asyncio.html#preventing-implicit-io-when-using-asyncsession
     __mapper_args__ = {"eager_defaults": True}
+
+    metadata = MetaData(
+        naming_convention={
+            "ix": "ix_%(column_0_label)s",
+            "uq": "uq_%(table_name)s_%(column_0_name)s",
+            "ck": "ck_%(table_name)s_`%(constraint_name)s`",
+            "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+            "pk": "pk_%(table_name)s",
+        }
+    )
+
+    type_annotation_map = {
+        datetime.datetime: DateTime(timezone=True),
+    }
 
 
 class DatabaseSessionUninitializedException(Exception):
