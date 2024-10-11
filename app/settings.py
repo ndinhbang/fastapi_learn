@@ -25,7 +25,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    APP_NAME: str = "app"
+    APP_NAME: str = "FastAPI"
     APP_KEY: str = secrets.token_urlsafe(32)
     APP_URL: str = "http://localhost:8000"
     APP_ENV: Literal["local", "staging", "production"] = "local"
@@ -42,16 +42,16 @@ class Settings(BaseSettings):
             self.FRONTEND_URL,
         ]
 
-    DB_HOST: str
+    DB_HOST: str = "localhost"
     DB_PORT: int = 3306
-    DB_USER: str
+    DB_USER: str = "root"
     DB_PASSWORD: str = ""
     DB_DATABASE: str = ""
 
     @computed_field  # type: ignore[prop-decorator]
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
-        return f"mysql+pymysql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_DATABASE}"
+        return f"mysql+asyncmy://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_DATABASE}"
 
 
 settings = Settings()  # type: ignore

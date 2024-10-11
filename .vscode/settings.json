@@ -1,6 +1,7 @@
 {
     "python.analysis.autoImportCompletions": true,
     "python.analysis.typeCheckingMode": "basic",
-    "editor.fontSize": 16,
-    "sync.gist": "8ea1c442a46476fd94693320165041d1"
+    "editor.fontSize": 18,
+    "sync.gist": "8ea1c442a46476fd94693320165041d1",
+    "terminal.explorerKind": "integrated"
 }
