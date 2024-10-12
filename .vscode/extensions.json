@@ -14,6 +14,7 @@
         "kevinrose.vsc-python-indent",
         "christian-kohler.path-intellisense",
         "redhat.vscode-yaml",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "ms-vscode.makefile-tools"
     ]
 }
