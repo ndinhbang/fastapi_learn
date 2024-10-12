@@ -1,10 +1,15 @@
-start:
+up:
 	docker compose up -d
 
-stop:
+down:
 	docker compose down
 
-restart: stop start
+restart: down up
 
-rebuild:
+clean:
+	docker system prune -a -f
+
+build:
 	docker compose build --no-cache
+
+refresh: clean down build up

@@ -5,5 +5,8 @@
     "sync.gist": "8ea1c442a46476fd94693320165041d1",
     "terminal.explorerKind": "integrated",
     "files.autoSave": "afterDelay",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.cnf": "ini"
+    }
 }

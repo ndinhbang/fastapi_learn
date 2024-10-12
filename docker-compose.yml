@@ -1,11 +1,11 @@
 # https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
     mysql:
+        image: fastapi-mysql:2024.10.12-001
+        # https://docs.docker.com/reference/compose-file/build/
         build:
             context: ./.docker/mysql
             dockerfile: Dockerfile
-            args:
-                MYSQL_ROOT_PASSWORD: root
         restart: always
         ports:
             - 3306:3306
