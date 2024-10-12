@@ -51,6 +51,8 @@ class Settings(BaseSettings):
     DB_PASSWORD: str = ""
     DB_DATABASE: str
 
+    SQLALCHEMY_ECHO: bool = False
+
     @computed_field  # type: ignore[prop-decorator]
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:

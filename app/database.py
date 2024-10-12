@@ -44,11 +44,12 @@ class DatabaseSessionManager:
     def __init__(
         self,
         host: str,
+        echo: bool = False,
         engine_kwargs: dict[str, Any] | None = None,
     ):
         default_kwargs = {"pool_size": 100, "max_overflow": 10}
         engine_kwargs = {**default_kwargs, **(engine_kwargs or {})}
-        self._engine = create_async_engine(host, **engine_kwargs)
+        self._engine = create_async_engine(host, echo=echo, **engine_kwargs)
         self._session_maker = async_sessionmaker(
             autocommit=False,
             autoflush=True,
@@ -91,7 +92,10 @@ class DatabaseSessionManager:
             await session.close()
 
 
-session_manager = DatabaseSessionManager(settings.SQLALCHEMY_DATABASE_URI)
+session_manager = DatabaseSessionManager(
+    settings.SQLALCHEMY_DATABASE_URI,
+    echo=settings.SQLALCHEMY_ECHO,
+)
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
